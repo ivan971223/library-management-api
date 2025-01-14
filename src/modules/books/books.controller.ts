@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { BorrowingService } from '../borrowing/borrowing.service';
+import { BorrowDto } from '../borrowing/dto/borrow.dto';
 
 @Controller('books')
 export class BooksController {
@@ -20,9 +21,7 @@ export class BooksController {
   ) {}
 
   @Post('/borrow')
-  async borrowBook(
-    @Body() borrowDto: { userId: number; bookId: number },
-  ): Promise<string> {
+  async borrowBook(@Body() borrowDto: BorrowDto): Promise<string> {
     const { userId, bookId } = borrowDto;
 
     // Check if the book is available
